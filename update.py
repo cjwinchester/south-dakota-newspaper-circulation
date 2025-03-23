@@ -583,6 +583,8 @@ class SdSosDocumentSet:
         fmt_str_pdf_metadata_description (str): A format string for the PDF metadata "description" attribute into which you can later interpolate variables. Example: 'A {document_type} campaign finance filing submitted on {filing_date} by {candidate} - {guid}'. Defaults to an empty string.
 
         keep_pdfs (bool): Pass False if you want to delete the local copies of the PDFs after they're uploaded to the Internet Archive. Defaults to True.
+
+        sort_columns (tuple): Columns by which to sort the JSON array before writing to file, in order. Defaults to ().
     """
 
     search_url: str
@@ -596,6 +598,7 @@ class SdSosDocumentSet:
     fmt_str_pdf_metadata_title: str = ''
     fmt_str_pdf_metadata_description: str = ''
     keep_pdfs: bool = True
+    sort_columns: tuple = ()
 
     def __post_init__(self):
         """Gets a list of completed guids, creates the slug,
@@ -765,9 +768,10 @@ class SdSosDocumentSet:
             filing_object.delete_tmp_files()
 
         # finally, sort the data and write the file out again
-        self.current_data.sort(
-            key=lambda x: (x['year'], x['newspaper'])
-        )
+        if self.sort_columns:
+            self.current_data.sort(
+                key=lambda x: [x[col] for col in self.sort_columns]
+            )
 
         with open(self.filepath_data, 'w') as outfile:
             json.dump(self.current_data, outfile)
@@ -873,7 +877,8 @@ if __name__ == '__main__':
             'year'
         ],
         fmt_str_pdf_metadata_title='{documentset_title} - {newspaper} - {year} - {guid}',
-        fmt_str_pdf_metadata_description='An ownership and circulation statement filed by South Dakota newspaper {newspaper} in {year}.'
+        fmt_str_pdf_metadata_description='An ownership and circulation statement filed by South Dakota newspaper {newspaper} in {year}.',
+        sort_columns=('year', 'newspaper')
     )
 
     document_set.get_search_results()
