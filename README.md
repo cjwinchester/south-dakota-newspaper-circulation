@@ -28,7 +28,7 @@ Stretch goals:
 ### Process
 All the action happens in [`update.py`](update.py) with an instance of the class `SdSosDocumentSet`.
 
-A Playwright browser loads the search page and performs a blank search, which generates a table of results. Various files related to each filing are downloaded into a temporary folder (`tmp`) named after its unique identifier in the system (`guid`).
+A Playwright browser loads the search page and performs a blank search, which generates a table of results. Various files related to each filing are downloaded into a temporary folder (`tmp`) and named after its unique identifier in the system (`guid`).
 
 Specifically, for each row in the search results table, the script:
 - Downloads the HTML behind the filing's detail page
