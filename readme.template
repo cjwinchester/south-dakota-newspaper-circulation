@@ -35,6 +35,7 @@ Specifically, for each row in the search results table, the script:
 - Parses the HTML file to look for image links and downloads them
 - Sharpens and clarifies the images and assembles them into a single PDF with new metadata fields in `pdfs/{guid}.pdf`, then OCRs the PDF
 - Generates a thumbnail in `thumbnails/{guid}.pdf`
+- Conditionally uploads the PDF to the Internet Archive
 
 Once the PDFs are generated, the script compiles data from individual filings into an array --
 
