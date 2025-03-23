@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>South Dakota newspaper ownership/circulation statements</title>
+    <link>https://github.com/cjwinchester/south-dakota-newspaper-circulation</link>
+    <description>An RSS feed that flags new ownership/circulation filings by newspaper owners in South Dakota.</description>
+    <language>en-us</language>
+    <lastBuildDate>{% BUILD_DATE %}</lastBuildDate>
+    <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-newspaper-circulation/refs/heads/main/south-dakota-newspaper-circulation-filings.xml" rel="self" type="application/rss+xml" />
+    {% ITEMS %}
+  </channel>
+  </rss>
